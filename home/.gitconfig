@@ -1,0 +1,14 @@
+[color]
+	ui = auto
+[alias]
+	cim = commit -m
+	st = status
+[core]
+	editor = subl -w
+	excludesfile = ~/.gitignore
+	quotepath = false
+[user]
+	name = Lars Feyerabend
+	email = post@lars-feyerabend.de
+[include]
+	path = .gitconfig-github
