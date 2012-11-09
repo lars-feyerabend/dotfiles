@@ -19,6 +19,37 @@ alias ll='ls -hl'
 alias 301='curl -w "%{redirect_url}\n"'
 alias sf="php symfony"
 
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# Shortcuts
+alias d="cd ~/Documents/Dropbox"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias g="git"
+alias s="subl ."
+alias o="open"
+alias oo="open ."
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Merge PDF files
+# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
+alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+
+
+# Flush Directory Service cache
+alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+
+# Clean up LaunchServices to remove duplicates in the “Open With” menu
+alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+
+
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export TERM=xterm-color
