@@ -83,3 +83,8 @@ unsetopt correct_all
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/SenchaCmd/3.0.0.250:$PATH
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+
+__git_files () {
+    _wanted files expl 'local files' _files
+}
