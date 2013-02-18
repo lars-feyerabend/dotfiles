@@ -81,6 +81,7 @@ unsetopt correct_all
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/SenchaCmd/3.0.0.250:$PATH
+export PATH=$PATH:/usr/local/texlive/2011/bin/x86_64-darwin
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
