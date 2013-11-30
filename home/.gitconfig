@@ -29,6 +29,7 @@
 	editor = subl -w
 	excludesfile = ~/.gitignore
 	quotepath = false
+	autocrlf = input
 [user]
 	name = Lars Feyerabend
 	email = post@lars-feyerabend.de

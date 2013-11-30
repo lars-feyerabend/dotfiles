@@ -73,19 +73,21 @@ export TERM=xterm-color
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew bundler gem github osx rails ruby rvm sublime)
+plugins=(gitfast brew gem github osx rails ruby rvm sublime symfony2 symfony)
 
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/SenchaCmd/3.0.0.250:$PATH
-export PATH=$PATH:/usr/local/texlive/2011/bin/x86_64-darwin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/Sencha/Cmd/3.1.1.274:$PATH
+export PATH=$PATH:/usr/local/texlive/2012/bin/x86_64-darwin
+export PATH=$PATH:/usr/local/share/npm/bin/
+export PATH="$(brew --prefix josegonzalez/php/php54)/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 
-__git_files () {
-    _wanted files expl 'local files' _files
-}
+#__git_files () {
+#    _wanted files expl 'local files' _files
+#}
