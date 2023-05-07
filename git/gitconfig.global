@@ -1,0 +1,111 @@
+[color]
+  ui = auto
+
+[alias]
+  cim = commit -m
+  st = status
+  # View the SHA, description, and history graph of the latest 20 commits
+  l = log --pretty=oneline -n 20 --graph
+  # View the current working tree status using the short format
+  s = status -s
+  # Show the diff between the latest commit and the current state
+  d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+  # `git di $number` shows the diff between the state `$number` revisions ago and the current state
+  di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+  # Undo a `git push`
+  undopush = push -f origin HEAD^:master
+  # Commit all changes
+  ca = !git add -A && git commit -av
+  # Switch to a branch, creating it if necessary
+  go = checkout -B
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+  # Credit an author on the latest commit
+  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+  # Interactive rebase with the given number of latest commits
+  reb = "!r() { git rebase -i HEAD~$1; }; r"
+
+[core]
+  editor = code -n -w
+  excludesfile = ~/.gitignore
+  quotepath = false
+  autocrlf = input
+  pager = diff-so-fancy | less --tabs=4 -RFX
+
+[user]
+	name = Lars Feyerabend
+	email = post@lars-feyerabend.de
+
+[init]
+	defaultBranch = main
+
+[push]
+  default = matching
+
+[pull]
+	rebase = false
+
+[diff]
+  noprefix = true
+  colorMoved = default
+
+[merge]
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+  conflictstyle = diff3
+
+[color]
+  # Use colors in Git commands that are capable of colored output when outputting to the terminal
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = 11
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  func = 146 bold
+  commit = yellow bold
+  whitespace = red reverse
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+# Use `origin` as the default remote on the `master` branch in all cases
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+
+# Use `origin` as the default remote on the `main` branch in all cases
+[branch "main"]
+  remote = origin
+  merge = refs/heads/main
+
+# URL shorthands
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+  insteadOf = "github:"
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+

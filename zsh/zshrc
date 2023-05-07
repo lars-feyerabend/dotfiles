@@ -1,0 +1,110 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt appendhistory autocd
+unsetopt beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/lf/.zshrc'
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+export PATH=$PATH:$HOME/bin/:$HOME/.bin/
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="$HOME/.fastlane/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+
+alias g="git"
+alias subl="subl -n"
+alias s="subl ."
+alias o="open"
+alias oo="open ."
+
+# fancy tools
+alias cat="bat"
+
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+export PATH="/Users/lf/bin/Sencha/Cmd:$PATH"
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+###-tns-completion-start-###
+if [ -f /Users/lf/.tnsrc ]; then
+    source /Users/lf/.tnsrc
+fi
+###-tns-completion-end-###
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+
+#eval "$(symfony-autocomplete)"
+
+source /opt/homebrew/share/antigen/antigen.zsh
+
+antigen theme romkatv/powerlevel10k
+
+antigen use oh-my-zsh
+antigen bundle gitfast
+antigen bundle docker
+antigen bundle docker-compose
+antigen bundle httpie
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle fzf
+
+antigen apply
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export TIME_STYLE=long-iso
+alias ls="exa --long --header --git"
+
+# BEGIN SNIPPET: Platform.sh CLI configuration
+HOME=${HOME:-'/Users/lf'}
+export PATH="$HOME/"'.platformsh/bin':"$PATH"
+if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
+
+
+# Git supports aliases defined in .gitconfig, but you cannot override Git
+# builtins (e.g. "git log") by putting an executable "git-log" somewhere in the
+# PATH. Also, git aliases are case-insensitive, but case can be useful to create
+# a negated command (gf = grep --files-with-matches; gF = grep
+# --files-without-match). As a workaround, translate "X" to "-x".
+git()
+{
+    typeset gitAlias="git-$1"
+    if type ${BASH_VERSION:+-t} "$gitAlias" >/dev/null 2>&1; then
+        shift
+        eval $gitAlias '"$@"'
+    elif [ "$1" = "${1#-}" ] && expr "$1" : '.*[[:upper:]]' >/dev/null; then
+        # Translate "X" to "-x" to enable aliases with uppercase letters.
+    translatedAlias=$(echo "$1" | sed -e 's/[[:upper:]]/-\l\0/g')
+        shift
+        command git "$translatedAlias" "$@"
+    else
+        command git "$@"
+    fi
+}

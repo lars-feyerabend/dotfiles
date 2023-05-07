@@ -1,0 +1,8 @@
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+#  PermitLocalCommand yes
+#  LocalCommand phook -e 'echo "\033]50;SetProfile=Production\a"' -a 'echo "\033]50;SetProfile=Default\a"'
+#  LocalCommand phook -e 'echo "\033]50;SetProfile=Staging\a"' -a 'echo "\033]50;SetProfile=Default\a"'

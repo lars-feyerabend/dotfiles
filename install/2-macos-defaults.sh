@@ -1,5 +1,28 @@
 #!/bin/bash
 
+# OSX Defaults
+# ============
+
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+#defaults write NSGlobalDomain KeyRepeat -int 1
+#defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+sudo pmset -a lidwake 1
+
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+#!/bin/bash
+
 # ~/.osx — http://mths.be/osx
 
 # Ask for the administrator password upfront
@@ -200,3 +223,69 @@ for app in "Dock" "Finder" "Safari" "SystemUIServer"; do
   killall "$app" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
+
+
+
+
+# Turn the display off after 5 minutes. Sleep after 20 minutes
+# on battery and 60 minutes when connected to power.
+sudo pmset -b displaysleep 10 sleep 20
+sudo pmset -c displaysleep 20 sleep 60
+
+# Open new folders in windows instead of tabs
+defaults write com.apple.finder FinderSpawnTab 0
+
+# Go to Desktop instead of recent items when opening Finder
+defaults write com.apple.finder NewWindowTarget PfDe
+defaults write com.apple.finder NewWindowTargetPath "file:///Users/Psy/Desktop/"
+
+# Always search within the current folder in Finder
+defaults write com.apple.finder FXDefaultSearchScope 'SCcf'
+
+# Set Sidebar Icon size to small
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
+# Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Disable Screensaver (Set to 'never')
+defaults -currentHost write com.apple.screensaver idleTime 0
+
+# Ask for password when waking up / lid is opened
+defaults write com.apple.screensaver askForPassword -bool true
+
+# but not if I open it back within 5 seconds
+defaults write com.apple.screensaver askForPasswordDelay 5
+
+# Trackpad: enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Hide Safari's bookmark bar.
+defaults write com.apple.Safari ShowFavoritesBar -bool false
+
+# Set up Safari for development.
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Disable Smart Quotes and Dashes
+defaults write -g NSAutomaticDashSubstitutionEnabled 0
+defaults write -g NSAutomaticQuoteSubstitutionEnabled 0
+
+# Disable Autocorrect, Period Substitution & Auto-capitalization
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write -g NSAutomaticCapitalizationEnabled -bool false
+
+
+# Restart Finder and other Services
+killall Finder
+killall Dock
+
+echo "Success! All OS X defaults are set."
+echo
+echo "Some changes will not take effect until you reboot your machine."

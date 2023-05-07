@@ -1,37 +1,90 @@
-dotfiles
-========
+# dotfiles
 
-Various dotfiles and settings
+## Installation Steps for new machine
 
-## Installation
+ 1. Install Xcode developer tools
+    ```bash
+    xcode-select --install
+    ```
 
-### With [homesick](https://github.com/technicalpickles/homesick/)
+ 1. Optional: Set HostName
+    ```bash
+    sudo scutil --set HostName PsyMBP
+    ```
 
-Install homesick:
+ 1. Clone Dotfiles
+    ```bash
+    git clone https://github.com/lars-feyerabend/dotfiles ~/.dotfiles
+    ```
 
-    gem install homesick
+ 1. Run [Installation Scripts](./install/) in order:
+    ```bash
+    ~/.dotfiles/install/0-base.sh
+    ```
+    ```bash
+    ~/.dotfiles/install/1-shell.sh
+    ```
+    ```bash
+    ~/.dotfiles/install/2-macos-defaults.sh
+    ```
+    ```bash
+    ~/.dotfiles/install/3-drivers.sh
+    ```
+    ```bash
+    ~/.dotfiles/install/4-fonts.sh
+    ```
+    ```bash
+    ~/.dotfiles/install/5-webdev.sh
+    ```
+    ```bash
+    ~/.dotfiles/install/6-apps.sh
+    ```
+    ```bash
+    ~/.dotfiles/install/7-default-apps.sh
+    ```
 
-Next, clone the castle:
+ 1. Install App Store Apps
+      * [TaskTab](https://apps.apple.com/us/app/tasktab-simple-to-do-list/id1395414535)
+      * [Zavala](https://apps.apple.com/de/app/zavala/id1546457750)
+      * [Dato](https://apps.apple.com/de/app/dato/id1470584107)
+      * [Telefon](https://apps.apple.com/de/app/telefon/id406825478)
+      * [Camera Window](https://apps.apple.com/de/app/camera-window/id6444870729)
+      * [Mockview](https://apps.apple.com/de/app/mockview/id1592728145)
+      * [Xcode](https://apps.apple.com/de/app/xcode/id497799835)
 
-    homesick clone lars-feyerabend/dotfiles
 
-Or, if you are me:
+sudo vim /etc/pam.d/sudo
 
-    homesick clone git@github.com:lars-feyerabend/dotfiles.git
-    homesick clone git@github.com:lars-feyerabend/dotfiles-private.git
 
-With the castle cloned, symlink contents into home dir:
+DOCK_APPS=(
+  "Things"
+  "Timer"
+  "Microsoft Edge"
+  "Microsoft Outlook"
+  "Microsoft Teams"
+  "Spotify"
+  "iTerm2"
+  "PhpStorm"
+  "Visual Studio Code"
+  "TablePlus"
+  "Microsoft Word"
+  "Microsoft Excel"
+  "Microsoft PowerPoint"
+  "draw.io"
+  "Miro"
+  "Telephone"
+  "Boop"
+)
 
-    homesick symlink lars-feyerabend/dotfiles
 
-Or, again, if you are me:
-    
-    homesick symlink dotfiles
-    homesick symlink dotfiles-private
+## Apps
 
-If this is a fresh install, run `.brew` and `.osx`:
+VPNStatus
+https://github.com/Timac/VPNStatus/releases/latest
+defaults write org.timac.VPNStatus IgnoredSSIDs "BK-INTERN"
 
-    source ~/.homesick/repos/dotfiles/.brew
-    source ~/.homesick/repos/dotfiles/.osx
 
-**NOTE:** The dotfiles-private repo is a private repository containing sensitive information like GitHub access tokens for `.gitconfig` or SSH configurations.
+
+
+
+
