@@ -36,7 +36,8 @@
 
 [user]
 	name = Lars Feyerabend
-	email = post@lars-feyerabend.de
+	email = lars.feyerabend@pixolith.de
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEae0YS07EWJFfY/oBgC0uEnuFy0tVc7wLCLahNRKWDt
 
 [init]
 	defaultBranch = main
@@ -109,3 +110,9 @@
 [url "git://gist.github.com/"]
   insteadOf = "gist:"
 
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign

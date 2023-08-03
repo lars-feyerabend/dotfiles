@@ -1,7 +1,5 @@
 #!/bin/bash
 
-brew tap homebrew/cask-fonts
-
 # Roboto Family
 brew install --cask font-roboto
 brew install --cask font-roboto-flex
@@ -9,6 +7,10 @@ brew install --cask font-roboto-serif
 brew install --cask font-roboto-slab
 brew install --cask font-roboto-mono
 brew install --cask font-roboto-mono-nerd-font
+
+# Ubuntu Family
+brew install --cask font-ubuntu-mono
+brew install --cask font-ubuntu
 
 # JetBrains Mono
 brew install --cask font-jetbrains-mono

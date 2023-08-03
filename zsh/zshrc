@@ -14,7 +14,7 @@ unsetopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/lf/.zshrc'
+zstyle :compinstall filename '/Users/lars/.zshrc'
 
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -27,7 +27,7 @@ compinit
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 export PATH=$PATH:$HOME/bin/:$HOME/.bin/
-export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/sbin:/opt/homebrew/bin:$PATH"
 export PATH="$HOME/.fastlane/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
@@ -44,16 +44,8 @@ alias cat="bat"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
-export PATH="/Users/lf/bin/Sencha/Cmd:$PATH"
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-###-tns-completion-start-###
-if [ -f /Users/lf/.tnsrc ]; then
-    source /Users/lf/.tnsrc
-fi
-###-tns-completion-end-###
-
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
@@ -65,8 +57,8 @@ antigen theme romkatv/powerlevel10k
 
 antigen use oh-my-zsh
 antigen bundle gitfast
-antigen bundle docker
-antigen bundle docker-compose
+#antigen bundle docker
+#antigen bundle docker-compose
 antigen bundle httpie
 antigen bundle command-not-found
 antigen bundle zsh-users/zsh-completions
@@ -83,7 +75,7 @@ export TIME_STYLE=long-iso
 alias ls="exa --long --header --git"
 
 # BEGIN SNIPPET: Platform.sh CLI configuration
-HOME=${HOME:-'/Users/lf'}
+HOME=${HOME:-'/Users/lars'}
 export PATH="$HOME/"'.platformsh/bin':"$PATH"
 if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
 
@@ -107,4 +99,12 @@ git()
     else
         command git "$@"
     fi
+}
+
+sudo() {
+    unset -f sudo
+    if [[ "$(uname)" == 'Darwin' ]] && ! grep 'pam_tid.so' /etc/pam.d/sudo --silent; then
+      sudo sed -i -e '1s;^;auth       sufficient     pam_tid.so\n;' /etc/pam.d/sudo
+    fi
+    sudo "$@"
 }

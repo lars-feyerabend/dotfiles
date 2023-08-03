@@ -22,21 +22,14 @@ main() {
     exit 1
   fi
 
-
   # Exit if duti not present
   if ! command -v $DUTI >/dev/null ; then
     echo "Program '$DUTI' not present"
     exit 1
   fi
 
-
   # Set programs and their extensions
-
-
-  local app='Bandizip' # Previously Entropy
-  local exts='zip rar 7z gz tgz tar'
-  set-exts "$app" "$exts"
-
+  # set-exts "Bandizip" "zip rar 7z gz tgz tar"
   set-exts "Visual Studio Code" "txt log js css sass scss ex exs md sh xml json yaml srt nfo svg"
 
 }
